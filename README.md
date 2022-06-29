@@ -1,3 +1,5 @@
+# Terrible Chess
+
 A simple chess AI that has a rating of approximatly 1000 ELO on sites like Chess.com or Lichess. 
 In the SmarMoveFinder, you will find a depth option. The AI will work best on 4, meaning a good compromise between waiting time and good counterplay. 
 
