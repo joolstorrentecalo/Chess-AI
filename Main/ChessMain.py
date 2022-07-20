@@ -124,7 +124,7 @@ def main():
                         print(move.getChessNotation())
                         for i in range(len(ValidMoves)):
                             if move == ValidMoves[i]:
-                                gs.makeMove(move)
+                                gs.make_move(move)
                                 moveMade = True
                                 animate = True
                                 sqSelected = ()
@@ -171,7 +171,7 @@ def main():
                 AIMove = returnQueue.get()
                 if AIMove is None:
                     AIMove = SmartMoveFinder.find_random_move(ValidMoves)
-                gs.makeMove(AIMove)
+                gs.make_move(AIMove)
                 moveMade = True
                 animate = True
                 AIThinking = False

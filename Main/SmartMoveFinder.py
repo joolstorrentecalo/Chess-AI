@@ -92,12 +92,12 @@ def find_random_move(valid_moves):
 
 
 # def findBestMove(gs, valid_moves):
-#   turnMultiplier = 1 if gs.whiteToMove else -1
+#   turn_multiplier = 1 if gs.whiteToMove else -1
 #   opponentMinMaxScore = CHECKMATE
 #   bestPlayerMove = None
 #   random.shuffle(valid_moves)
 #   for playerMove in valid_moves:
-#       gs.makeMove(playerMove)
+#       gs.make_move(playerMove)
 #       opponentsMoves = gs.getValidMoves
 #       if gs.staleMate:
 #           opponentMaxScore = STALEMATE
@@ -106,14 +106,14 @@ def find_random_move(valid_moves):
 #       else:
 #           opponentMaxScore = -CHECKMATE
 #           for opponentsMove in opponentsMoves:
-#               gs.makeMove(opponentsMove)
+#               gs.make_move(opponentsMove)
 #               gs.getValidMoves()
 #               if gs.checkMate:
 #                   score = CHECKMATE
 #               elif gs.staleMate:
 #                   score = STALEMATE
 #               else:
-#                   score = -turnMultiplier*scoreMaterial(gs.board)
+#                   score = -turn_multiplier*scoreMaterial(gs.board)
 #               if score > opponentMaxScore:
 #                   opponentMaxScore = score
 #               gs.undoMove()
@@ -128,7 +128,7 @@ def findBestMove(gs, ValidMoves, returnQueue):
     nextMove = None
     random.shuffle(ValidMoves)
     counter = 0
-    findMoveNegaMaxAlphaBeta(gs, ValidMoves, DEPTH, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1)
+    find_move_mega_max_alpha_beta(gs, ValidMoves, DEPTH, -CHECKMATE, CHECKMATE, 1 if gs.whiteToMove else -1)
     print(counter)
     returnQueue.put(nextMove)
 
@@ -141,7 +141,7 @@ def findBestMove(gs, ValidMoves, returnQueue):
 #   if whiteToMove:
 #       maxScore = -CHECKMATE
 #       for move in valid_moves:
-#           gs.makeMove(move)
+#           gs.make_move(move)
 #           nextMoves = gs.getValidMoves()
 #           score = findMoveMinMax(gs, nextMoves, depth-1, False)
 #           if score > maxScore:
@@ -154,7 +154,7 @@ def findBestMove(gs, ValidMoves, returnQueue):
 #   else:
 #       minScore = CHECKMATE
 #       for move in valid_moves:
-#           gs.makeMove(move)
+#           gs.make_move(move)
 #           nextMoves = gs.getValidMoves()
 #           score = findMoveMinMax(gs, nextMoves, depth-1, False)
 #           if score < minScore:
@@ -165,16 +165,16 @@ def findBestMove(gs, ValidMoves, returnQueue):
 #       return minScore
 
 
-# def findMoveNegaMax(gs, valid_moves, depth, turnMultiplier):
+# def findMoveMegaMax(gs, valid_moves, depth, turn_multiplier):
 #    global nextMove
 #   if depth == 0:
-#        return turnMultiplier*scoreBoard(gs)
+#        return turn_multiplier*scoreBoard(gs)
 
 #    maxScore = -CHECKMATE
 #    for move in valid_moves:
-#        gs.makeMove(move)
+#        gs.make_move(move)
 #        nextMoves = gs.getValidMoves()
-#        score = -findMoveNegaMax(gs, nextMoves, depth-1, -turnMultiplier)
+#        score = -findMoveMegaMax(gs, nextMoves, depth-1, -turn_multiplier)
 #        if score > maxScore:
 #            maxScore = score
 #            if depth == DEPTH:
@@ -183,16 +183,16 @@ def findBestMove(gs, ValidMoves, returnQueue):
 #    return maxScore
 
 
-def findMoveNegaMaxAlphaBeta(gs, ValidMoves, depth, alpha, beta, turnMultiplier):
+def find_move_mega_max_alpha_beta(gs, valid_moves, depth, alpha, beta, turn_multiplier):
     global nextMove
     if depth == 0:
-        return turnMultiplier * scoreBoard(gs)
+        return turn_multiplier * scoreBoard(gs)
 
     maxScore = -CHECKMATE
-    for move in ValidMoves:
-        gs.makeMove(move)
+    for move in valid_moves:
+        gs.make_move(move)
         nextMoves = gs.getValidMoves()
-        score = -findMoveNegaMaxAlphaBeta(gs, nextMoves, depth - 1, -beta, -alpha, -turnMultiplier)
+        score = -find_move_mega_max_alpha_beta(gs, nextMoves, depth - 1, -beta, -alpha, -turn_multiplier)
         if score > maxScore:
             maxScore = score
             if depth == DEPTH:
