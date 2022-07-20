@@ -1,19 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-#The next bit is needed for the AI, it will refer to the tables. These values can be changed to choice.
+# The next bit is needed for the AI, it will refer to the tables. These values can be changed to choice.
+
 import random
 
-pieceScores = {"R" : 5.63, "N" : 4.16, "B" : 4.14, "Q" : 9.5, "K" : 0, "P" : 0.9}
+pieceScores = {"R": 5.63, "N": 4.16, "B": 4.14, "Q": 9.5, "K": 0, "P": 0.9}
 
-rookScores =   [[4, 3, 4, 4, 4, 4, 3, 4],
-                [4, 4, 4, 4, 4, 4, 4, 4],
-                [1, 1, 2, 3, 3, 2, 1, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 2, 3, 4, 4, 3, 2, 1],
-                [1, 1, 2, 2, 2, 2, 1, 1],
-                [4, 4, 4, 4, 4, 4, 4, 4],
-                [4, 3, 4, 4, 4, 4, 3, 4]]
+rookScores = [[4, 3, 4, 4, 4, 4, 3, 4],
+              [4, 4, 4, 4, 4, 4, 4, 4],
+              [1, 1, 2, 3, 3, 2, 1, 1],
+              [1, 2, 3, 4, 4, 3, 2, 1],
+              [1, 2, 3, 4, 4, 3, 2, 1],
+              [1, 1, 2, 2, 2, 2, 1, 1],
+              [4, 4, 4, 4, 4, 4, 4, 4],
+              [4, 3, 4, 4, 4, 4, 3, 4]]
 
 knightScores = [[1, 1, 1, 1, 1, 1, 1, 1],
                 [1, 2, 2, 2, 2, 2, 2, 1],
@@ -33,72 +34,69 @@ bishopScores = [[4, 3, 2, 1, 1, 2, 3, 4],
                 [3, 4, 3, 2, 2, 3, 4, 3],
                 [4, 3, 2, 1, 1, 2, 3, 4]]
 
-queenScores =  [[1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 2, 3, 3, 3, 1, 1, 1],
-                [1, 4, 3, 3, 3, 4, 2, 1],
-                [1, 2, 3, 3, 3, 2, 2, 1],
-                [1, 2, 3, 3, 3, 2, 2, 1],
-                [1, 4, 3, 3, 3, 4, 2, 1],
-                [1, 1, 2, 3, 3, 1, 1, 1],
-                [1, 1, 1, 3, 1, 1, 1, 1]]
+queenScores = [[1, 1, 1, 1, 1, 1, 1, 1],
+               [1, 2, 3, 3, 3, 1, 1, 1],
+               [1, 4, 3, 3, 3, 4, 2, 1],
+               [1, 2, 3, 3, 3, 2, 2, 1],
+               [1, 2, 3, 3, 3, 2, 2, 1],
+               [1, 4, 3, 3, 3, 4, 2, 1],
+               [1, 1, 2, 3, 3, 1, 1, 1],
+               [1, 1, 1, 3, 1, 1, 1, 1]]
 
-kingScores =   [[0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 5, 0, 0, 5, 0, 5, 0]]
+kingScores = [[0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0, 0, 0],
+              [0, 5, 0, 0, 5, 0, 5, 0]]
 
-whitePawnScores =  [[9, 9, 9, 9, 9, 9, 9, 9],
-                    [8, 8, 8, 8, 8, 8, 8, 8],
-                    [5, 6, 6, 7, 7, 6, 6, 5],
-                    [2, 3, 3, 5, 5, 3, 3, 2],
-                    [1, 2, 3, 4, 4, 3, 2, 1],
-                    [1, 1, 2, 3, 3, 2, 1, 1],
-                    [1, 1, 1, 0, 0, 1, 1, 1],
-                    [0, 0, 0, 0, 0, 0, 0, 0]]
+whitePawnScores = [[9, 9, 9, 9, 9, 9, 9, 9],
+                   [8, 8, 8, 8, 8, 8, 8, 8],
+                   [5, 6, 6, 7, 7, 6, 6, 5],
+                   [2, 3, 3, 5, 5, 3, 3, 2],
+                   [1, 2, 3, 4, 4, 3, 2, 1],
+                   [1, 1, 2, 3, 3, 2, 1, 1],
+                   [1, 1, 1, 0, 0, 1, 1, 1],
+                   [0, 0, 0, 0, 0, 0, 0, 0]]
 
+blackPawnScores = [[0, 0, 0, 0, 0, 0, 0, 0],
+                   [1, 1, 1, 0, 0, 1, 1, 1],
+                   [1, 1, 2, 3, 3, 2, 1, 1],
+                   [1, 2, 3, 4, 4, 3, 2, 1],
+                   [2, 3, 3, 5, 5, 3, 3, 2],
+                   [5, 6, 6, 7, 7, 6, 6, 5],
+                   [8, 8, 8, 8, 8, 8, 8, 8],
+                   [9, 9, 9, 9, 9, 9, 9, 9]]
 
-blackPawnScores =  [[0, 0, 0, 0, 0, 0, 0, 0],
-                    [1, 1, 1, 0, 0, 1, 1, 1],
-                    [1, 1, 2, 3, 3, 2, 1, 1],
-                    [1, 2, 3, 4, 4, 3, 2, 1],
-                    [2, 3, 3, 5, 5, 3, 3, 2],
-                    [5, 6, 6, 7, 7, 6, 6, 5],
-                    [8, 8, 8, 8, 8, 8, 8, 8],
-                    [9, 9, 9, 9, 9, 9, 9, 9]]
-
-
-piecePositionScores =  {"R": rookScores,
-                        "N": knightScores,
-                        "B": bishopScores,
-                        "Q": queenScores,
-                        "K": kingScores,
-                        "wP": whitePawnScores,
-                        "bP": blackPawnScores}
-
-
+piecePositionScores = {"R": rookScores,
+                       "N": knightScores,
+                       "B": bishopScores,
+                       "Q": queenScores,
+                       "K": kingScores,
+                       "wP": whitePawnScores,
+                       "bP": blackPawnScores}
 
 CHECKMATE = 10000
 STALEMATE = 0
 DEPTH = 4
 
+
 # End of tables
 
-#Start of move finder. It will draw the board from ChessMain to be able to determine its calculations.
+# Start of move finder. It will draw the board from ChessMain to be able to determine its calculations.
 
-def findRandomMove(ValidMoves):
-    return ValidMoves[random.randint(0, len(ValidMoves) - 1)]
+def find_random_move(valid_moves):
+    return valid_moves[random.randint(0, len(valid_moves) - 1)]
 
 
-# def findBestMove(gs, ValidMoves):
+# def findBestMove(gs, valid_moves):
 #   turnMultiplier = 1 if gs.whiteToMove else -1
 #   opponentMinMaxScore = CHECKMATE
 #   bestPlayerMove = None
-#   random.shuffle(ValidMoves)
-#   for playerMove in ValidMoves:
+#   random.shuffle(valid_moves)
+#   for playerMove in valid_moves:
 #       gs.makeMove(playerMove)
 #       opponentsMoves = gs.getValidMoves
 #       if gs.staleMate:
@@ -135,14 +133,14 @@ def findBestMove(gs, ValidMoves, returnQueue):
     returnQueue.put(nextMove)
 
 
-#def findMoveMinMax(gs, ValidMoves, depth, whiteToMove):
+# def findMoveMinMax(gs, valid_moves, depth, whiteToMove):
 #   global nextMove
 #   if depth == 0:
 #       return scoreMaterial(gs.board)
 
 #   if whiteToMove:
 #       maxScore = -CHECKMATE
-#       for move in ValidMoves:
+#       for move in valid_moves:
 #           gs.makeMove(move)
 #           nextMoves = gs.getValidMoves()
 #           score = findMoveMinMax(gs, nextMoves, depth-1, False)
@@ -155,7 +153,7 @@ def findBestMove(gs, ValidMoves, returnQueue):
 
 #   else:
 #       minScore = CHECKMATE
-#       for move in ValidMoves:
+#       for move in valid_moves:
 #           gs.makeMove(move)
 #           nextMoves = gs.getValidMoves()
 #           score = findMoveMinMax(gs, nextMoves, depth-1, False)
@@ -167,13 +165,13 @@ def findBestMove(gs, ValidMoves, returnQueue):
 #       return minScore
 
 
-#def findMoveNegaMax(gs, ValidMoves, depth, turnMultiplier):
+# def findMoveNegaMax(gs, valid_moves, depth, turnMultiplier):
 #    global nextMove
 #   if depth == 0:
 #        return turnMultiplier*scoreBoard(gs)
 
 #    maxScore = -CHECKMATE
-#    for move in ValidMoves:
+#    for move in valid_moves:
 #        gs.makeMove(move)
 #        nextMoves = gs.getValidMoves()
 #        score = -findMoveNegaMax(gs, nextMoves, depth-1, -turnMultiplier)
@@ -188,13 +186,13 @@ def findBestMove(gs, ValidMoves, returnQueue):
 def findMoveNegaMaxAlphaBeta(gs, ValidMoves, depth, alpha, beta, turnMultiplier):
     global nextMove
     if depth == 0:
-        return turnMultiplier*scoreBoard(gs)
+        return turnMultiplier * scoreBoard(gs)
 
     maxScore = -CHECKMATE
     for move in ValidMoves:
         gs.makeMove(move)
         nextMoves = gs.getValidMoves()
-        score = -findMoveNegaMaxAlphaBeta(gs, nextMoves, depth-1, -beta, -alpha, -turnMultiplier)
+        score = -findMoveNegaMaxAlphaBeta(gs, nextMoves, depth - 1, -beta, -alpha, -turnMultiplier)
         if score > maxScore:
             maxScore = score
             if depth == DEPTH:
@@ -202,10 +200,11 @@ def findMoveNegaMaxAlphaBeta(gs, ValidMoves, depth, alpha, beta, turnMultiplier)
                 print(move, score)
         gs.undoMove()
         if maxScore > alpha:
-           alpha = maxScore
+            alpha = maxScore
         if alpha >= beta:
             break
     return maxScore
+
 
 # End of move finder
 
@@ -236,10 +235,10 @@ def scoreBoard(gs):
 
                 if square[0] == 'w':
                     score += pieceScores[square[1]] \
-                        + piecePositionScore * .15
+                             + piecePositionScore * .15
                 elif square[0] == 'b':
                     score -= pieceScores[square[1]] \
-                        + piecePositionScore * .15
+                             + piecePositionScore * .15
 
     return score
 

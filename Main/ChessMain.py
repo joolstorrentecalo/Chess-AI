@@ -3,7 +3,7 @@
 
 import pygame as p
 from multiprocessing import Process, Queue
-from Chess import ChessEngine, SmartMoveFinder
+from Main import ChessEngine, SmartMoveFinder
 
 BOARD_WIDTH = BOARD_HEIGHT = 900
 MOVE_LOG_PANEL_WIDTH = 160
@@ -170,7 +170,7 @@ def main():
                 print("Done Processing")
                 AIMove = returnQueue.get()
                 if AIMove is None:
-                    AIMove = SmartMoveFinder.findRandomMove(ValidMoves)
+                    AIMove = SmartMoveFinder.find_random_move(ValidMoves)
                 gs.makeMove(AIMove)
                 moveMade = True
                 animate = True
