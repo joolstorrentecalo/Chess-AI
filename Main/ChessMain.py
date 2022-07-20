@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import pygame as p
 from multiprocessing import Process, Queue
+
+import pygame as p
+
 from Main import ChessEngine, SmartMoveFinder
 
 BOARD_WIDTH = BOARD_HEIGHT = 900
