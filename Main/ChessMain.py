@@ -90,7 +90,7 @@ def main():
     screen.fill(p.Color("white"))
     moveLogFont = p.font.SysFont("Arial", 24, False, False)
     gs = ChessEngine.GameState()
-    ValidMoves = gs.getValidMoves()
+    ValidMoves = gs.get_valid_moves()
     moveMade = False
     animate = False
     StartSound()
@@ -123,7 +123,7 @@ def main():
                         playerClicks.append(sqSelected)
                     if len(playerClicks) == 2 and humanTurn:
                         move = ChessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
-                        print(move.getChessNotation())
+                        print(move.get_chess_notation())
                         for i in range(len(ValidMoves)):
                             if move == ValidMoves[i]:
                                 gs.make_move(move)
@@ -149,7 +149,7 @@ def main():
 
                 if e.key == p.K_r:
                     gs = ChessEngine.GameState()
-                    ValidMoves = gs.getValidMoves()
+                    ValidMoves = gs.get_valid_moves()
                     sqSelected = ()
                     playerClicks = ()
                     moveMade = False
@@ -182,7 +182,7 @@ def main():
             if animate:
                 animateMove(gs.moveLog[-1], screen, gs.board, clock)
                 PieceMovedSound()
-            ValidMoves = gs.getValidMoves()
+            ValidMoves = gs.get_valid_moves()
             moveMade = False
             animate = False
             moveUndone = False

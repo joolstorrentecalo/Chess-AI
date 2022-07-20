@@ -98,7 +98,7 @@ def find_random_move(valid_moves):
 #   random.shuffle(valid_moves)
 #   for playerMove in valid_moves:
 #       gs.make_move(playerMove)
-#       opponentsMoves = gs.getValidMoves
+#       opponentsMoves = gs.get_valid_moves
 #       if gs.staleMate:
 #           opponentMaxScore = STALEMATE
 #       elif gs.checkMate:
@@ -107,7 +107,7 @@ def find_random_move(valid_moves):
 #           opponentMaxScore = -CHECKMATE
 #           for opponentsMove in opponentsMoves:
 #               gs.make_move(opponentsMove)
-#               gs.getValidMoves()
+#               gs.get_valid_moves()
 #               if gs.checkMate:
 #                   score = CHECKMATE
 #               elif gs.staleMate:
@@ -142,7 +142,7 @@ def find_best_move(gs, ValidMoves, returnQueue):
 #       maxScore = -CHECKMATE
 #       for move in valid_moves:
 #           gs.make_move(move)
-#           nextMoves = gs.getValidMoves()
+#           nextMoves = gs.get_valid_moves()
 #           score = findMoveMinMax(gs, nextMoves, depth-1, False)
 #           if score > maxScore:
 #               maxScore = score
@@ -155,7 +155,7 @@ def find_best_move(gs, ValidMoves, returnQueue):
 #       minScore = CHECKMATE
 #       for move in valid_moves:
 #           gs.make_move(move)
-#           nextMoves = gs.getValidMoves()
+#           nextMoves = gs.get_valid_moves()
 #           score = findMoveMinMax(gs, nextMoves, depth-1, False)
 #           if score < minScore:
 #               minScore = score
@@ -173,7 +173,7 @@ def find_best_move(gs, ValidMoves, returnQueue):
 #    maxScore = -CHECKMATE
 #    for move in valid_moves:
 #        gs.make_move(move)
-#        nextMoves = gs.getValidMoves()
+#        nextMoves = gs.get_valid_moves()
 #        score = -findMoveMegaMax(gs, nextMoves, depth-1, -turn_multiplier)
 #        if score > maxScore:
 #            maxScore = score
@@ -191,7 +191,7 @@ def find_move_mega_max_alpha_beta(gs, valid_moves, depth, alpha, beta, turn_mult
     max_score = -CHECKMATE
     for move in valid_moves:
         gs.make_move(move)
-        nextMoves = gs.getValidMoves()
+        nextMoves = gs.get_valid_moves()
         score = -find_move_mega_max_alpha_beta(gs, nextMoves, depth - 1, -beta, -alpha, -turn_multiplier)
         if score > max_score:
             max_score = score
