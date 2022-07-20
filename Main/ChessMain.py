@@ -21,7 +21,7 @@ IMAGES = {}
 def StartSound():
     p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
     p.mixer.init()
-    startSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Sounds\\start.mp3")
+    startSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\start.mp3")
     if startSound.play(0) == True:
         startSound.play(0)
         print("May both players win")
@@ -32,7 +32,7 @@ def StartSound():
 def PieceMovedSound():
    p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
    p.mixer.init()
-   pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Sounds\\pieceMoved.mp3")
+   pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceMoved.mp3")
    if pieceMovedSound.play(0) == True:
        pieceMovedSound.play(0)
        print("Seems like a good move! Or is it?")
@@ -42,7 +42,7 @@ def PieceMovedSound():
 #   def PieceCapturedSound():
 #       p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
 #       p.mixer.init()
-#       pieceCapturedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Sounds\\pieceCaptured.mp3")
+#       pieceCapturedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceCaptured.mp3")
 #       if pieceCapturedSound.play(0) == True:
 #           pieceCapturedSound.play(0)
 #           print("It's just one piece, do not worry")
@@ -53,7 +53,7 @@ def PieceMovedSound():
 #   def InCheckSound():
 #       p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
 #       p.mixer.init()
-#       inCheckSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Sounds\\inCheck.mp3")
+#       inCheckSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\inCheck.mp3")
 #       if inCheckSound.play(0) == True:
 #           inCheckSound.play(0)
 #           print("That seems like a difficult situation")
@@ -63,7 +63,7 @@ def PieceMovedSound():
 def EndSound():
     p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
     p.mixer.init()
-    endSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Sounds\\end.mp3")
+    endSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\end.mp3")
     if endSound.play(0) == True:
         endSound.play(0)
         print("Thank you for playing")
