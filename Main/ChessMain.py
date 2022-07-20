@@ -72,12 +72,12 @@ def EndSound():
 
 # End of audio controls
 
-# Loads in images under the name of the pieces
+# Loads in Piece Images under the name of the pieces
 
 def loadImages():
     pieces = ["bB", "bK", "bN", "bP", "bQ", "bR", "wB", "wK", "wN", "wP", "wQ", "wR"]
     for piece in pieces:
-        IMAGES[piece] = p.transform.scale(p.image.load("images/" + piece + ".png"), (SQ_SIZE, SQ_SIZE))
+        IMAGES[piece] = p.transform.scale(p.image.load("Piece Images/" + piece + ".png"), (SQ_SIZE, SQ_SIZE))
 
 
 #Start of controls
