@@ -79,7 +79,7 @@ def EndSound():
 def load_images():
     pieces = ["bB", "bK", "bN", "bP", "bQ", "bR", "wB", "wK", "wN", "wP", "wQ", "wR"]
     for piece in pieces:
-        IMAGES[piece] = p.transform.scale(p.image.load("Piece Images/" + piece + ".png"), (SQ_SIZE, SQ_SIZE))
+        IMAGES[piece] = p.transform.scale(p.image.load("Piece Images" + piece + ".png"), (SQ_SIZE, SQ_SIZE))
 
 
 # Start of controls

@@ -10,7 +10,8 @@ Images and sounds are added recently, these are home-made and can be used withou
 Images are in PNG format to safe as much space as possible while retaining superior flexibility in resolution. 
 
 Keep in mind that for every audio file, you HAVE to change the directory in which the file is housed. Do not forget to use // instead of /!
-For any questions, do not hesitate to send a message. 
+(Same goes for the Piece Images!)
+For any questions about this, do not hesitate to send a message. 
 
 If you are feeling adventurous, read the init.py file for some big improvements that can be made. The sources to some information needed are included.
 
