@@ -21,7 +21,7 @@ IMAGES = {}
 def start_sound():
     p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
-    startSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
+    startSound = p.mixer.Sound("/Main/start.mp3")
     if startSound.play():
         startSound.play()
         print("May both players win")
@@ -79,7 +79,7 @@ def end_sound():
 def load_images():
     pieces = ["bB", "bK", "bN", "bP", "bQ", "bR", "wB", "wK", "wN", "wP", "wQ", "wR"]
     for piece in pieces:
-        IMAGES[piece] = p.transform.scale(p.image.load("Piece Images" + piece + ".png"), (SQ_SIZE, SQ_SIZE))
+        IMAGES[piece] = p.transform.scale(p.image.load(piece + ".png"), (SQ_SIZE, SQ_SIZE))
 
 
 # Start of controls
