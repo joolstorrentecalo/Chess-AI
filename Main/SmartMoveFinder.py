@@ -91,7 +91,7 @@ def find_random_move(valid_moves):
     return valid_moves[random.randint(0, len(valid_moves) - 1)]
 
 
-# def findBestMove(gs, valid_moves):
+# def find_best_move(gs, valid_moves):
 #   turn_multiplier = 1 if gs.whiteToMove else -1
 #   opponentMinMaxScore = CHECKMATE
 #   bestPlayerMove = None
@@ -113,7 +113,7 @@ def find_random_move(valid_moves):
 #               elif gs.staleMate:
 #                   score = STALEMATE
 #               else:
-#                   score = -turn_multiplier*scoreMaterial(gs.board)
+#                   score = -turn_multiplier*score_material(gs.board)
 #               if score > opponentMaxScore:
 #                   opponentMaxScore = score
 #               gs.undoMove()
@@ -123,7 +123,7 @@ def find_random_move(valid_moves):
 #       gs.undoMove()
 #   return bestPlayerMove
 
-def findBestMove(gs, ValidMoves, returnQueue):
+def find_best_move(gs, ValidMoves, returnQueue):
     global nextMove, counter
     nextMove = None
     random.shuffle(ValidMoves)
@@ -136,7 +136,7 @@ def findBestMove(gs, ValidMoves, returnQueue):
 # def findMoveMinMax(gs, valid_moves, depth, whiteToMove):
 #   global nextMove
 #   if depth == 0:
-#       return scoreMaterial(gs.board)
+#       return score_material(gs.board)
 
 #   if whiteToMove:
 #       maxScore = -CHECKMATE
@@ -168,7 +168,7 @@ def findBestMove(gs, ValidMoves, returnQueue):
 # def findMoveMegaMax(gs, valid_moves, depth, turn_multiplier):
 #    global nextMove
 #   if depth == 0:
-#        return turn_multiplier*scoreBoard(gs)
+#        return turn_multiplier*score_board(gs)
 
 #    maxScore = -CHECKMATE
 #    for move in valid_moves:
@@ -184,33 +184,33 @@ def findBestMove(gs, ValidMoves, returnQueue):
 
 
 def find_move_mega_max_alpha_beta(gs, valid_moves, depth, alpha, beta, turn_multiplier):
-    global nextMove
+    global nextMoves
     if depth == 0:
-        return turn_multiplier * scoreBoard(gs)
+        return turn_multiplier * score_board(gs)
 
-    maxScore = -CHECKMATE
+    max_score = -CHECKMATE
     for move in valid_moves:
         gs.make_move(move)
         nextMoves = gs.getValidMoves()
         score = -find_move_mega_max_alpha_beta(gs, nextMoves, depth - 1, -beta, -alpha, -turn_multiplier)
-        if score > maxScore:
-            maxScore = score
+        if score > max_score:
+            max_score = score
             if depth == DEPTH:
-                nextMove = move
+                nextMoves = move
                 print(move, score)
         gs.undoMove()
-        if maxScore > alpha:
-            alpha = maxScore
+        if max_score > alpha:
+            alpha = max_score
         if alpha >= beta:
             break
-    return maxScore
+    return max_score
 
 
 # End of move finder
 
 # Here the scoreboard will be drawn to determine what decisions to make. See values in run-box.
 
-def scoreBoard(gs):
+def score_board(gs):
     if gs.checkMate:
         if gs.whiteToMove:
             return -CHECKMATE
@@ -224,26 +224,26 @@ def scoreBoard(gs):
         for col in range(len(gs.board[row])):
             square = gs.board[row][col]
             if square != '--':
-                piecePositionScore = 0
+                piece_position_score = 0
                 if square[1] == 'P':
                     if square[1] == 'P':
-                        piecePositionScore = \
+                        piece_position_score = \
                             piecePositionScores[square][row][col]
                     else:
-                        piecePositionScore = \
+                        piece_position_score = \
                             piecePositionScores[square[1]][row][col]
 
                 if square[0] == 'w':
                     score += pieceScores[square[1]] \
-                             + piecePositionScore * .15
+                             + piece_position_score * .15
                 elif square[0] == 'b':
                     score -= pieceScores[square[1]] \
-                             + piecePositionScore * .15
+                             + piece_position_score * .15
 
     return score
 
 
-def scoreMaterial(board):
+def score_material(board):
     score = 0
     for row in board:
         for square in row:

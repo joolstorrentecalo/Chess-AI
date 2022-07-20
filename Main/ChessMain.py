@@ -163,7 +163,7 @@ def main():
                 AIThinking = True
                 print("Processing...")
                 returnQueue = Queue()
-                moveFinderProcess = Process(target=SmartMoveFinder.findBestMove, args=(gs, ValidMoves, returnQueue))
+                moveFinderProcess = Process(target=SmartMoveFinder.find_best_move, args=(gs, ValidMoves, returnQueue))
                 moveFinderProcess.start()
 
             if not moveFinderProcess.is_alive():
