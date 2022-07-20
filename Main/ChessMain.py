@@ -19,7 +19,7 @@ IMAGES = {}
 # Audio part of the program
 
 def start_sound():
-    p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
+    p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
     startSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
     if startSound.play():
@@ -29,12 +29,12 @@ def start_sound():
         pass
 
 
-def PieceMovedSound():
-    p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
+def piece_moved_sound():
+    p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
     pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceMoved.mp3")
-    if pieceMovedSound.play(0) == True:
-        pieceMovedSound.play(0)
+    if pieceMovedSound.play():
+        pieceMovedSound.play()
         print("Seems like a good move! Or is it?")
     else:
         pass
@@ -61,12 +61,12 @@ def PieceMovedSound():
 #       else:
 #           pass
 
-def EndSound():
-    p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
+def end_sound():
+    p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
     endSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\end.mp3")
-    if endSound.play(0) == True:
-        endSound.play(0)
+    if endSound.play():
+        endSound.play()
         print("Thank you for playing")
     else:
         pass
@@ -182,21 +182,21 @@ def main():
 
         if moveMade:
             if animate:
-                animateMove(gs.moveLog[-1], screen, gs.board, clock)
-                PieceMovedSound()
+                animate_move(gs.moveLog[-1], screen, gs.board, clock)
+                piece_moved_sound()
             ValidMoves = gs.get_valid_moves()
             moveMade = False
             animate = False
             moveUndone = False
 
-        drawGameState(screen, gs, ValidMoves, sqSelected, moveLogFont)
+        draw_game_state(screen, gs, ValidMoves, sqSelected, moveLogFont)
 
         if gs.checkMate or gs.staleMate:
-            EndSound()
+            end_sound()
             gameOver = True
-            drawEndGameText(screen,
-                            "Engine wins by checkmate" if gs.staleMate else "Equal thinking, stalemate"
-                            if gs.whiteToMove else "You win by checkmate")
+            draw_end_game_text(screen,
+                               "Engine wins by checkmate" if gs.staleMate else "Equal thinking, stalemate"
+                               if gs.whiteToMove else "You win by checkmate")
         clock.tick(MAX_FPS)
         p.display.flip()
 
@@ -205,14 +205,14 @@ def main():
 
 # GUI/UI controls
 
-def drawGameState(screen, gs, ValidMoves, sqSelected, moveLogFont):
-    drawBoard(screen)
-    highLightSquares(screen, gs, ValidMoves, sqSelected)
-    drawPieces(screen, gs.board)
-    drawMoveLog(screen, gs, moveLogFont)
+def draw_game_state(screen, gs, ValidMoves, sqSelected, moveLogFont):
+    draw_board(screen)
+    high_light_squares(screen, gs, ValidMoves, sqSelected)
+    draw_pieces(screen, gs.board)
+    draw_move_log(screen, gs, moveLogFont)
 
 
-def drawBoard(screen):
+def draw_board(screen):
     global colors
     colors = [p.Color("white"), p.Color("purple")]
     for r in range(DIMENSION):
@@ -221,7 +221,7 @@ def drawBoard(screen):
             p.draw.rect(screen, color, p.Rect(c * SQ_SIZE, r * SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
 
-def highLightSquares(screen, gs, ValidMoves, sqSelected):
+def high_light_squares(screen, gs, ValidMoves, sqSelected):
     if sqSelected != ():
         r, c = sqSelected
         if gs.board[r][c][0] == ("w" if gs.whiteToMove else "b"):
@@ -235,7 +235,7 @@ def highLightSquares(screen, gs, ValidMoves, sqSelected):
                     screen.blit(s, (move.endCol * SQ_SIZE, move.endRow * SQ_SIZE))
 
 
-def drawPieces(screen, board):
+def draw_pieces(screen, board):
     for r in range(DIMENSION):
         for c in range(DIMENSION):
             piece = board[r][c]
@@ -243,7 +243,7 @@ def drawPieces(screen, board):
                 screen.blit(IMAGES[piece], p.Rect(c * SQ_SIZE, r * SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
 
-def drawMoveLog(screen, gs, font):
+def draw_move_log(screen, gs, font):
     moveLogRect = p.Rect(BOARD_WIDTH, 0, MOVE_LOG_PANEL_WIDTH, MOVE_LOG_PANEL_HEIGHT)
     p.draw.rect(screen, p.Color("black"), moveLogRect)
     moveLog = gs.moveLog
@@ -271,7 +271,7 @@ def drawMoveLog(screen, gs, font):
         textY += textObject.get_height() + lineSpacing
 
 
-def animateMove(move, screen, board, clock):
+def animate_move(move, screen, board, clock):
     global colors
     dR = move.endRow - move.startRow
     dC = move.endCol - move.startCol
@@ -280,8 +280,8 @@ def animateMove(move, screen, board, clock):
 
     for frame in range(frameCount + 1):
         r, c = (move.startRow + dR * frame / frameCount, move.startCol + dC * frame / frameCount)
-        drawBoard(screen)
-        drawPieces(screen, board)
+        draw_board(screen)
+        draw_pieces(screen, board)
         color = colors[(move.endRow + move.endCol) % 2]
         endSquare = p.Rect(move.endCol * SQ_SIZE, move.endRow * SQ_SIZE, SQ_SIZE, SQ_SIZE)
         p.draw.rect(screen, color, endSquare)
@@ -297,7 +297,7 @@ def animateMove(move, screen, board, clock):
         clock.tick(60)
 
 
-def drawEndGameText(screen, text):
+def draw_end_game_text(screen, text):
     font = p.font.SysFont("Helvetica", 32, True, False)
     textObject = font.render(text, 8, p.Color("Black"))
     textLocation = p.Rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT).move(BOARD_WIDTH / 2 - textObject.get_width() / 2,
