@@ -17,11 +17,12 @@ IMAGES = {}
 
 
 # Audio part of the program
+# Remember to point your strings to the right directory.
 
 def start_sound():
     p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
-    startSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
+    startSound = p.mixer.Sound("C:\\Users\\thecockslapper\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
     if startSound.play():
         startSound.play()
         print("May both players win")
@@ -32,7 +33,7 @@ def start_sound():
 def piece_moved_sound():
     p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
-    pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceMoved.mp3")
+    pieceMovedSound = p.mixer.Sound("C:\\Users\\thecockslapper\\Downloads\\ChessAi\\Piece Sounds\\pieceMoved.mp3")
     if pieceMovedSound.play():
         pieceMovedSound.play()
         print("Seems like a good move! Or is it?")
@@ -43,7 +44,7 @@ def piece_moved_sound():
 #   def PieceCapturedSound():
 #       p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
 #       p.mixer.init()
-#       pieceCapturedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceCaptured.mp3")
+#       pieceCapturedSound = p.mixer.Sound("C:\\Users\\thecockslapper\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceCaptured.mp3")
 #       if pieceCapturedSound.play(0) == True:
 #           pieceCapturedSound.play(0)
 #           print("It's just one piece, do not worry")
@@ -54,7 +55,7 @@ def piece_moved_sound():
 #   def InCheckSound():
 #       p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
 #       p.mixer.init()
-#       inCheckSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\inCheck.mp3")
+#       inCheckSound = p.mixer.Sound("C:\\Users\\thecockslapper\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\inCheck.mp3")
 #       if inCheckSound.play(0) == True:
 #           inCheckSound.play(0)
 #           print("That seems like a difficult situation")
@@ -64,7 +65,7 @@ def piece_moved_sound():
 def end_sound():
     p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
-    endSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\end.mp3")
+    endSound = p.mixer.Sound("C:\\Users\\thecockslapper\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\end.mp3")
     if endSound.play():
         endSound.play()
         print("Thank you for playing")
@@ -90,7 +91,7 @@ def main():
     screen = p.display.set_mode((BOARD_WIDTH + MOVE_LOG_PANEL_WIDTH, BOARD_HEIGHT))
     clock = p.time.Clock()
     screen.fill(p.Color("white"))
-    moveLogFont = p.font.SysFont("Arial", 24, False, False)
+    moveLogFont = p.font.SysFont("Arial", 24)
     gs = ChessEngine.GameState()
     ValidMoves = gs.get_valid_moves()
     moveMade = False
@@ -102,7 +103,7 @@ def main():
     playerClicks = []
     gameOver = False
     playerOne = True
-    playerTwo = True
+    playerTwo = False
     AIThinking = False
     moveFinderProcess = None
     moveUndone = False
@@ -298,7 +299,7 @@ def animate_move(move, screen, board, clock):
 
 
 def draw_end_game_text(screen, text):
-    font = p.font.SysFont("Helvetica", 32, True, False)
+    font = p.font.SysFont("Helvetica", 32, True)
     textObject = font.render(text, 8, p.Color("Black"))
     textLocation = p.Rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT).move(BOARD_WIDTH / 2 - textObject.get_width() / 2,
                                                                 BOARD_HEIGHT / 2 - textObject.get_height() / 2)
