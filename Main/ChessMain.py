@@ -18,26 +18,27 @@ IMAGES = {}
 
 # Audio part of the program
 
-def StartSound():
+def start_sound():
     p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
     p.mixer.init()
-    startSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\start.mp3")
-    if startSound.play(0) == True:
-        startSound.play(0)
+    startSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
+    if startSound.play():
+        startSound.play()
         print("May both players win")
     else:
         pass
 
 
 def PieceMovedSound():
-   p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
-   p.mixer.init()
-   pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceMoved.mp3")
-   if pieceMovedSound.play(0) == True:
-       pieceMovedSound.play(0)
-       print("Seems like a good move! Or is it?")
-   else:
-       pass
+    p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
+    p.mixer.init()
+    pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\pieceMoved.mp3")
+    if pieceMovedSound.play(0) == True:
+        pieceMovedSound.play(0)
+        print("Seems like a good move! Or is it?")
+    else:
+        pass
+
 
 #   def PieceCapturedSound():
 #       p.mixer.pre_init(frequency=96000, channels=2, buffer=1024)
@@ -70,17 +71,18 @@ def EndSound():
     else:
         pass
 
+
 # End of audio controls
 
 # Loads in Piece Images under the name of the pieces
 
-def loadImages():
+def load_images():
     pieces = ["bB", "bK", "bN", "bP", "bQ", "bR", "wB", "wK", "wN", "wP", "wQ", "wR"]
     for piece in pieces:
         IMAGES[piece] = p.transform.scale(p.image.load("Piece Images/" + piece + ".png"), (SQ_SIZE, SQ_SIZE))
 
 
-#Start of controls
+# Start of controls
 
 def main():
     global returnQueue
@@ -93,8 +95,8 @@ def main():
     ValidMoves = gs.get_valid_moves()
     moveMade = False
     animate = False
-    StartSound()
-    loadImages()
+    start_sound()
+    load_images()
     running = True
     sqSelected = ()
     playerClicks = []
@@ -113,8 +115,8 @@ def main():
             elif e.type == p.MOUSEBUTTONDOWN:
                 if not gameOver:
                     location = p.mouse.get_pos()
-                    col = location[0]//SQ_SIZE
-                    row = location[1]//SQ_SIZE
+                    col = location[0] // SQ_SIZE
+                    row = location[1] // SQ_SIZE
                     if sqSelected == (row, col) or col >= 8:
                         sqSelected = ()
                         playerClicks = []
@@ -198,6 +200,7 @@ def main():
         clock.tick(MAX_FPS)
         p.display.flip()
 
+
 # End of controls
 
 # GUI/UI controls
@@ -246,7 +249,7 @@ def drawMoveLog(screen, gs, font):
     moveLog = gs.moveLog
     moveTexts = []
     for i in range(0, len(moveLog), 2):
-        moveString = str(i // 2+1) + "  " + str(moveLog[i]) + "  "
+        moveString = str(i // 2 + 1) + "  " + str(moveLog[i]) + "  "
         if i + 1 < len(moveLog):
             moveString += str(moveLog[i + 1]) + "  "
         moveTexts.append(moveString)
@@ -303,7 +306,8 @@ def drawEndGameText(screen, text):
     textObject = font.render(text, 0, p.Color("Gray"))
     screen.blit(textObject, textLocation.move(2, 2))
 
-#End of UI/GUI controls
+
+# End of UI/GUI controls
 
 if __name__ == "__main__":
     main()
