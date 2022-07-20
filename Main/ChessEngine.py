@@ -16,7 +16,7 @@ class GameState:
             ["wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP"],
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
 
-        self.moveFunctions = {"R": self.getRookMoves,
+        self.moveFunctions = {"R": self.get_rook_moves,
                               "N": self.getKnightMoves,
                               "B": self.getBishopMoves,
                               "Q": self.getQueenMoves,
@@ -72,7 +72,7 @@ class GameState:
         self.castleRightsLog.append(CastleRights(self.currentCastlingRight.wks, self.currentCastlingRight.bks,
                                                  self.currentCastlingRight.wqs, self.currentCastlingRight.bqs))
 
-    def undoMove(self):
+    def undo_move(self):
         if len(self.moveLog) != 0:
             move = self.moveLog.pop()
             self.board[move.startRow][move.startCol] = move.pieceMoved
@@ -116,7 +116,7 @@ class GameState:
             checkRow = self.blackKingLocation[1]
         if self.inCheck:
             if len(self.checks) == 1:
-                moves = self.getAllPossibleMoves()
+                moves = self.get_all_possible_moves()
                 check = self.checks[0]
                 checkRow = check[0]
                 checkCol = check[1]
@@ -137,7 +137,7 @@ class GameState:
             else:
                 self.getKingMoves(checkRow, checkRow, moves)
         else:
-            moves = self.getAllPossibleMoves()
+            moves = self.get_all_possible_moves()
 
         if len(moves) == 0:
             if self.inCheck:
@@ -150,7 +150,7 @@ class GameState:
 
         return moves
 
-    def getAllPossibleMoves(self):
+    def get_all_possible_moves(self):
         moves = []
         for r in range(len(self.board)):
             for c in range(len(self.board[r])):
@@ -160,7 +160,7 @@ class GameState:
                     self.moveFunctions[piece](r, c, moves)
         return moves
 
-    def getRookMoves(self, r, c, moves):
+    def get_rook_moves(self, r, c, moves):
         piecePinned = False
         pinDirection = ()
         for i in range(len(self.pins) - 1, -1, -1):
@@ -239,7 +239,7 @@ class GameState:
                         break
 
     def getQueenMoves(self, r, c, moves):
-        self.getRookMoves(r, c, moves)
+        self.get_rook_moves(r, c, moves)
         self.getBishopMoves(r, c, moves)
 
     def getKingMoves(self, r, c, moves):

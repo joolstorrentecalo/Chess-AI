@@ -138,7 +138,7 @@ def main():
                 if e.key == p.K_u:
                     sqSelected = ()
                     playerClicks = []
-                    gs.undoMove()
+                    gs.undo_move()
                     moveMade = True
                     animate = False
                     gameOver = False

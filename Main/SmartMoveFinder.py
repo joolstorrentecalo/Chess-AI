@@ -116,11 +116,11 @@ def find_random_move(valid_moves):
 #                   score = -turn_multiplier*score_material(gs.board)
 #               if score > opponentMaxScore:
 #                   opponentMaxScore = score
-#               gs.undoMove()
+#               gs.undo_move()
 #       if opponentMaxScore < opponentMinMaxScore:
 #           opponentMinMaxScore = opponentMaxScore
 #           bestPlayerMove = playerMove
-#       gs.undoMove()
+#       gs.undo_move()
 #   return bestPlayerMove
 
 def find_best_move(gs, ValidMoves, returnQueue):
@@ -148,7 +148,7 @@ def find_best_move(gs, ValidMoves, returnQueue):
 #               maxScore = score
 #               if depth == DEPTH:
 #                   nextMove = move
-#           gs.undoMove()
+#           gs.undo_move()
 #       return maxScore
 
 #   else:
@@ -161,7 +161,7 @@ def find_best_move(gs, ValidMoves, returnQueue):
 #               minScore = score
 #               if depth == DEPTH:
 #                   nextMove = move
-#           gs.undoMove()
+#           gs.undo_move()
 #       return minScore
 
 
@@ -179,7 +179,7 @@ def find_best_move(gs, ValidMoves, returnQueue):
 #            maxScore = score
 #            if depth == DEPTH:
 #                nextMove = move
-#       gs.undoMove()
+#       gs.undo_move()
 #    return maxScore
 
 
@@ -198,7 +198,7 @@ def find_move_mega_max_alpha_beta(gs, valid_moves, depth, alpha, beta, turn_mult
             if depth == DEPTH:
                 nextMoves = move
                 print(move, score)
-        gs.undoMove()
+        gs.undo_move()
         if max_score > alpha:
             alpha = max_score
         if alpha >= beta:
