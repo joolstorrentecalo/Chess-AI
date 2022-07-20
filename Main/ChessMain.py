@@ -21,7 +21,7 @@ IMAGES = {}
 def start_sound():
     p.mixer.pre_init(frequency=96000, buffer=1024)
     p.mixer.init()
-    startSound = p.mixer.Sound("/Main/start.mp3")
+    startSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
     if startSound.play():
         startSound.play()
         print("May both players win")
