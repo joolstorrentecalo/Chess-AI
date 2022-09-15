@@ -1,6 +1,6 @@
 # Terrible Chess
 
-A simple chess AI that has a rating of approximately 1000 ELO on sites like Chess.com or Lichess. 
+A simple chess AI that has a rating of approximately 200 ELO on sites like Chess.com or Lichess. 
 In the SmartMoveFinder, you will find a depth option. The AI will work best on 4, meaning a good compromise between waiting time and good counter play. 
 
 Further comments are in the code. Everything is written in Python. It is important to make sure you have the modules needed at the start of the code. 

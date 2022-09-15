@@ -20,9 +20,9 @@ IMAGES = {}
 # Remember to point your strings to the right directory.
 
 def start_sound():
-    p.mixer.pre_init(frequency=96000, buffer=1024)
+    p.mixer.pre_init(frequency=48000, buffer=1024)
     p.mixer.init()
-    startSound = p.mixer.Sound("C:\\Users\\thecockslapper\\Downloads\\ChessAi\\Piece Sounds\\start.mp3")
+    startSound = p.mixer.Sound("C:\\Users\\jools\Downloads\\Github repo\\Chess-AI\\Piece Sounds\\start.wav")
     if startSound.play():
         startSound.play()
         print("May both players win")
@@ -31,9 +31,9 @@ def start_sound():
 
 
 def piece_moved_sound():
-    p.mixer.pre_init(frequency=96000, buffer=1024)
+    p.mixer.pre_init(frequency=48000, buffer=1024)
     p.mixer.init()
-    pieceMovedSound = p.mixer.Sound("C:\\Users\\thecockslapper\\Downloads\\ChessAi\\Piece Sounds\\pieceMoved.mp3")
+    pieceMovedSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\Github repo\\Chess-AI\\Piece Sounds\\pieceMoved.wav")
     if pieceMovedSound.play():
         pieceMovedSound.play()
         print("Seems like a good move! Or is it?")
@@ -63,9 +63,9 @@ def piece_moved_sound():
 #           pass
 
 def end_sound():
-    p.mixer.pre_init(frequency=96000, buffer=1024)
+    p.mixer.pre_init(frequency=48000, buffer=1024)
     p.mixer.init()
-    endSound = p.mixer.Sound("C:\\Users\\thecockslapper\\PycharmProjects\\Chess\\Chess\\Piece Sounds\\end.mp3")
+    endSound = p.mixer.Sound("C:\\Users\\jools\\Downloads\\Github repo\\Chess-AI\\Piece Sounds\\end.wav")
     if endSound.play():
         endSound.play()
         print("Thank you for playing")
@@ -81,7 +81,6 @@ def load_images():
     pieces = ["bB", "bK", "bN", "bP", "bQ", "bR", "wB", "wK", "wN", "wP", "wQ", "wR"]
     for piece in pieces:
         IMAGES[piece] = p.transform.scale(p.image.load(piece + ".png"), (SQ_SIZE, SQ_SIZE))
-
 
 # Start of controls
 
