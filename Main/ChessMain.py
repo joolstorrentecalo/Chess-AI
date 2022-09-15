@@ -20,7 +20,7 @@ IMAGES = {}
 # Remember to point your strings to the right directory.
 
 def start_sound():
-    p.mixer.pre_init(frequency=48000, buffer=1024)
+    p.mixer.pre_init(frequency=48000, buffer=512)
     p.mixer.init()
     startSound = p.mixer.Sound("C:\\Users\\jools\Downloads\\Github repo\\Chess-AI\\Piece Sounds\\start.wav")
     if startSound.play():
